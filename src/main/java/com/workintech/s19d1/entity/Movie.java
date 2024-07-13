@@ -1,5 +1,7 @@
 package com.workintech.s19d1.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -33,6 +35,7 @@ public class Movie {
     @Column(name= "release_date")
     private LocalDate releaseDate;
 
+    @JsonBackReference
     @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.DETACH,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinTable(name = "movie_actor",schema = "fsweb",
             inverseJoinColumns = @JoinColumn(name= "actor_id"),
